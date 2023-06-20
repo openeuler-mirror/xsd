@@ -51,7 +51,7 @@ rm -rf libcutl
 %if 0%{?rhel} < 7
 %{!?__global_ldflags: %global __global_ldflags -Wl,-z,relro}
 %endif
-%make_build verbose=1 CXX=g++ CC=gcc CXXFLAGS="$RPM_OPT_FLAGS -fPIC -pie -Wl,-z,now" LDFLAGS="%{__global_ldflags} -fPIC -pie -Wl,-z,now" BOOST_LINK_SYSTEM=y EXTERNAL_LIBCUTL=y
+%make_build verbose=1 CXXFLAGS="$RPM_OPT_FLAGS -fPIC -pie -Wl,-z,now" LDFLAGS="%{__global_ldflags} -fPIC -pie -Wl,-z,now" BOOST_LINK_SYSTEM=y EXTERNAL_LIBCUTL=y
 
 %install
 rm -rf apidocdir
@@ -114,6 +114,9 @@ make -j 1 test EXTERNAL_LIBCUTL=y BOOST_LINK_SYSTEM=y
 %doc apidocdir/*
 
 %changelog
+* Tue Jun 20 2023 yoo <sunyuechi@iscas.ac.cn> - 4.1.0-0.2.a11.kb3
+- fix clang build error
+
 * Wed May 12 2021 kpkg <kpkg@kylinos.com.cn> - 4.1.0-0.2.a11.kb3
 - rebuild for KY3.4-4
 
